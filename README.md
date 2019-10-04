@@ -1,2 +1,3 @@
-# regpeople
+# RegPeople
+
 Cadastro de pessoas
