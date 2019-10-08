@@ -16,9 +16,9 @@
     <name>apiregpeople</name>
     <description>Cadastro de Pessoas</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+<!--    <properties>-->
+<!--        <java.version>1.8</java.version>-->
+<!--    </properties>-->
 
     <dependencies>
 
