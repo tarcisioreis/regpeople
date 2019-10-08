@@ -29,7 +29,7 @@ public class PessoaService {
     public String validarAtributos(PessoaDTO pessoaDTO, String operacao) {
 
         String message = null;
-        DateValidator validator = new DateValidatorUsingDateFormat("dd/MM/yyyy");
+        DateValidator validator = new DateValidatorUsingDateFormat("yyyy-MM-dd");
 
         try {
             if (operacao.equals("UPDATE")) {
@@ -47,8 +47,10 @@ public class PessoaService {
                 message = "Informe Nome da pessoa.";
             }
             if (pessoaDTO.getEmail() != null) {
-                if (!Utilitarios.isValidEmail(pessoaDTO.getEmail()) && message == null) {
-                    message = "Informe E-mail válido.";
+                if (!pessoaDTO.getEmail().isEmpty() || pessoaDTO.getEmail().length() > 0) {
+                    if (!Utilitarios.isValidEmail(pessoaDTO.getEmail()) && message == null) {
+                        message = "Informe E-mail válido.";
+                    }
                 }
             }
             if (pessoaDTO.getSexo() < 0 && message == null) {
@@ -115,7 +117,7 @@ public class PessoaService {
     }
 
     public List<PessoaDTO> findByBirthDate(@Param("dtNascimento") String dtNascimento) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return pessoaRepository.findByDtNascimento(LocalDate.parse(dtNascimento, formatter));
     }
 

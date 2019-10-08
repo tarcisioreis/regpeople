@@ -45,138 +45,6 @@ public class PessoaController {
         this.maskCpf = maskCpf;
     }
 
-    @PostMapping("/findByCpf/{cpf}")
-    @ApiOperation(value="Busca de Cadastro por Cpf.")
-    ResponseEntity<List<PessoaDTO>> findByCpf(@Valid @PathVariable String cpf) {
-
-        try {
-            httpStatus = null;
-            lista = pessoaService.findByCpf(Utilitarios.formatarString(Utilitarios.somenteDigitos(cpf), getMaskCpf()));
-
-            if (lista.size() == 0 || lista.isEmpty()) {
-                httpStatus = HttpStatus.NOT_FOUND;
-                throw new BusinessException("Não foi encontrado cadastro de pessoa pelo Cpf.");
-            }
-
-            httpStatus = HttpStatus.FOUND;
-
-            return new ResponseEntity<>(lista, httpStatus);
-        } catch (Exception e) {
-            throw new BusinessException(e.getMessage());
-        }
-
-    }
-
-    @PostMapping("/findByName/{nome}")
-    @ApiOperation(value="Busca de Cadastro por Nome.")
-    ResponseEntity<List<PessoaDTO>> findByName(@Valid @PathVariable String nome) {
-
-        try {
-            httpStatus = null;
-            lista = pessoaService.findByName(nome);
-
-            if (lista.size() == 0 || lista.isEmpty()) {
-                httpStatus = HttpStatus.NOT_FOUND;
-                throw new BusinessException("Não foi encontrado cadastro de pessoa pelo Nome.");
-            }
-
-            httpStatus = HttpStatus.FOUND;
-
-            return new ResponseEntity<>(lista, httpStatus);
-        } catch (Exception e) {
-            throw new BusinessException(e.getMessage());
-        }
-
-    }
-
-    @PostMapping("/findByNatural/{naturalidade}")
-    @ApiOperation(value="Busca de Cadastro por Naturalidade.")
-    ResponseEntity<List<PessoaDTO>> findByNatural(@Valid @PathVariable String naturalidade) {
-
-        try {
-            httpStatus = null;
-            lista = pessoaService.findByNatural(naturalidade);
-
-            if (lista.size() == 0 || lista.isEmpty()) {
-                httpStatus = HttpStatus.NOT_FOUND;
-                throw new BusinessException("Não foi encontrado cadastro de pessoa pela Naturalidade.");
-            }
-
-            httpStatus = HttpStatus.FOUND;
-
-            return new ResponseEntity<>(lista, httpStatus);
-        } catch (Exception e) {
-            throw new BusinessException(e.getMessage());
-        }
-
-    }
-
-    @PostMapping("/findByNationality/{nacionalidade}")
-    @ApiOperation(value="Busca de Cadastro por Nacionalidade.")
-    ResponseEntity<List<PessoaDTO>> findByNationality(@Valid @PathVariable String nacionalidade) {
-
-        try {
-            httpStatus = null;
-            lista = pessoaService.findByNationality(nacionalidade);
-
-            if (lista.size() == 0 || lista.isEmpty()) {
-                httpStatus = HttpStatus.NOT_FOUND;
-                throw new BusinessException("Não foi encontrado cadastro de pessoa pela Nacionalidade.");
-            }
-
-            httpStatus = HttpStatus.FOUND;
-
-            return new ResponseEntity<>(lista, httpStatus);
-        } catch (Exception e) {
-            throw new BusinessException(e.getMessage());
-        }
-
-    }
-
-    @PostMapping("/findByEmail/{email}")
-    @ApiOperation(value="Busca de Cadastro por Email.")
-    ResponseEntity<List<PessoaDTO>> findByEmail(@Valid @PathVariable String email) {
-
-        try {
-            httpStatus = null;
-            lista = pessoaService.findByEmail(email);
-
-            if (lista.size() == 0 || lista.isEmpty()) {
-                httpStatus = HttpStatus.NOT_FOUND;
-                throw new BusinessException("Não foi encontrado cadastro de pessoa pelo E-mail.");
-            }
-
-            httpStatus = HttpStatus.FOUND;
-
-            return new ResponseEntity<>(lista, httpStatus);
-        } catch (Exception e) {
-            throw new BusinessException(e.getMessage());
-        }
-
-    }
-
-    @PostMapping("/findByBirthDate")
-    @ApiOperation(value="Busca de Cadastro por Data de Nascimento.")
-    ResponseEntity<List<PessoaDTO>> findByBirthDate(@Valid @RequestParam(name="dtNascimento") String dtNascimento) {
-
-        try {
-            httpStatus = null;
-            lista = pessoaService.findByBirthDate(dtNascimento);
-
-            if (lista.size() == 0 || lista.isEmpty()) {
-                httpStatus = HttpStatus.NOT_FOUND;
-                throw new BusinessException("Não foi encontrado cadastro de pessoa pela Data de Nascimento.");
-            }
-
-            httpStatus = HttpStatus.FOUND;
-
-            return new ResponseEntity<>(lista, httpStatus);
-        } catch (Exception e) {
-            throw new BusinessException(e.getMessage());
-        }
-
-    }
-
     @GetMapping("/list")
     @ApiOperation(value="Listagem de Todas as pessoas cadastradas.")
     ResponseEntity<List<PessoaDTO>> list() {
@@ -319,6 +187,169 @@ public class PessoaController {
         }
 
         return new ResponseEntity<>(message, httpStatus);
+    }
+
+    @PostMapping("/findByCpf/{cpf}")
+    @ApiOperation(value="Busca de Cadastro por Cpf.")
+    ResponseEntity<List<PessoaDTO>> findByCpf(@Valid @PathVariable String cpf) {
+
+        try {
+            httpStatus = null;
+
+            if (cpf == null) {
+                httpStatus = HttpStatus.BAD_REQUEST;
+                throw new BusinessException("Falta filtro para a busca.");
+            }
+
+            lista = pessoaService.findByCpf(Utilitarios.formatarString(Utilitarios.somenteDigitos(cpf), getMaskCpf()));
+
+            if (lista.size() == 0 || lista.isEmpty()) {
+                httpStatus = HttpStatus.NOT_FOUND;
+                throw new BusinessException("Não foi encontrado cadastro de pessoa pelo Cpf.");
+            }
+
+            httpStatus = HttpStatus.FOUND;
+
+            return new ResponseEntity<>(lista, httpStatus);
+        } catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/findByName/{nome}")
+    @ApiOperation(value="Busca de Cadastro por Nome.")
+    ResponseEntity<List<PessoaDTO>> findByName(@Valid @PathVariable String nome) {
+
+        try {
+            httpStatus = null;
+            if (nome == null) {
+                httpStatus = HttpStatus.BAD_REQUEST;
+                throw new BusinessException("Falta filtro para a busca.");
+            }
+
+            lista = pessoaService.findByName(nome);
+
+            if (lista.size() == 0 || lista.isEmpty()) {
+                httpStatus = HttpStatus.NOT_FOUND;
+                throw new BusinessException("Não foi encontrado cadastro de pessoa pelo Nome.");
+            }
+
+            httpStatus = HttpStatus.FOUND;
+
+            return new ResponseEntity<>(lista, httpStatus);
+        } catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/findByNatural/{naturalidade}")
+    @ApiOperation(value="Busca de Cadastro por Naturalidade.")
+    ResponseEntity<List<PessoaDTO>> findByNatural(@Valid @PathVariable String naturalidade) {
+
+        try {
+            httpStatus = null;
+            if (naturalidade == null) {
+                httpStatus = HttpStatus.BAD_REQUEST;
+                throw new BusinessException("Falta filtro para a busca.");
+            }
+
+            lista = pessoaService.findByNatural(naturalidade);
+
+            if (lista.size() == 0 || lista.isEmpty()) {
+                httpStatus = HttpStatus.NOT_FOUND;
+                throw new BusinessException("Não foi encontrado cadastro de pessoa pela Naturalidade.");
+            }
+
+            httpStatus = HttpStatus.FOUND;
+
+            return new ResponseEntity<>(lista, httpStatus);
+        } catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/findByNationality/{nacionalidade}")
+    @ApiOperation(value="Busca de Cadastro por Nacionalidade.")
+    ResponseEntity<List<PessoaDTO>> findByNationality(@Valid @PathVariable String nacionalidade) {
+
+        try {
+            httpStatus = null;
+            if (nacionalidade == null) {
+                httpStatus = HttpStatus.BAD_REQUEST;
+                throw new BusinessException("Falta filtro para a busca.");
+            }
+
+            lista = pessoaService.findByNationality(nacionalidade);
+
+            if (lista.size() == 0 || lista.isEmpty()) {
+                httpStatus = HttpStatus.NOT_FOUND;
+                throw new BusinessException("Não foi encontrado cadastro de pessoa pela Nacionalidade.");
+            }
+
+            httpStatus = HttpStatus.FOUND;
+
+            return new ResponseEntity<>(lista, httpStatus);
+        } catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/findByEmail/{email}")
+    @ApiOperation(value="Busca de Cadastro por Email.")
+    ResponseEntity<List<PessoaDTO>> findByEmail(@Valid @PathVariable String email) {
+
+        try {
+            httpStatus = null;
+            if (email == null) {
+                httpStatus = HttpStatus.BAD_REQUEST;
+                throw new BusinessException("Falta filtro para a busca.");
+            }
+
+            lista = pessoaService.findByEmail(email);
+
+            if (lista.size() == 0 || lista.isEmpty()) {
+                httpStatus = HttpStatus.NOT_FOUND;
+                throw new BusinessException("Não foi encontrado cadastro de pessoa pelo E-mail.");
+            }
+
+            httpStatus = HttpStatus.FOUND;
+
+            return new ResponseEntity<>(lista, httpStatus);
+        } catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/findByBirthDate")
+    @ApiOperation(value="Busca de Cadastro por Data de Nascimento.")
+    ResponseEntity<List<PessoaDTO>> findByBirthDate(@Valid @RequestParam(name="dtNascimento") String dtNascimento) {
+
+        try {
+            httpStatus = null;
+            if (dtNascimento == null) {
+                httpStatus = HttpStatus.BAD_REQUEST;
+                throw new BusinessException("Falta filtro para a busca.");
+            }
+
+            lista = pessoaService.findByBirthDate(dtNascimento);
+
+            if (lista.size() == 0 || lista.isEmpty()) {
+                httpStatus = HttpStatus.NOT_FOUND;
+                throw new BusinessException("Não foi encontrado cadastro de pessoa pela Data de Nascimento.");
+            }
+
+            httpStatus = HttpStatus.FOUND;
+
+            return new ResponseEntity<>(lista, httpStatus);
+        } catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+
     }
 
 }
