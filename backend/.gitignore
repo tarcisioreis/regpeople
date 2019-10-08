@@ -17,7 +17,7 @@ src/test
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea_old
+.idea
 *.iws
 *.iml
 *.ipr
