@@ -17,7 +17,7 @@ src/test
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea_old
 *.iws
 *.iml
 *.ipr
@@ -32,4 +32,4 @@ build/
 
 ### VS Code ###
 .vscode/
-/.idea/
+/.idea_old/
