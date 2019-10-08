@@ -13,8 +13,11 @@ PessoaController:
 Operações Básicas:
 
 list - via GET - Listagem de Todas as pessoas cadastradas - mostra id, nome, cpf, data de nascimento, nacionalidade, naturalidade, e-mail e sexo(0 - Masculino e 1 - Feminino);
+
 create - via POST - parâmetro objeto DTO pessoaDTO - inclui nome(Obrigatório), cpf(Obrigatório), data de nascimento(Obrigatório), nacionalidade(Não Obrigatório), naturalidade(Não Obrigatório), e-mail(Não Obrigatório) e sexo(0 - Masculino e 1 - Feminino) - validação dos campos obrigatórios, no caso do email se informado válida, formata CPF, verifica duplicidade de CPF e valida a validade do CPF(usamos o site https://www.4devs.com.br/gerador_de_cpf para gerar cpfs de testes);
+
 update - via PUT - parâmetro objeto DTO pessoaDTO - inclui id(Chave Obrigatória), nome(Obrigatório), cpf(Obrigatório), data de nascimento(Obrigatório), nacionalidade(Não Obrigatório), naturalidade(Não Obrigatório), e-mail(Não Obrigatório) e sexo(0 - Masculino e 1 - Feminino) - validação dos campos obrigatórios, no caso do email se informado válida, formata CPF, verifica duplicidade de CPF e valida a validade do CPF(usamos o site https://www.4devs.com.br/gerador_de_cpf para gerar cpfs de testes);
+
 delete - via DELETE - parâmetro id do cadastro da pessoa - verifica se existe o dado informado e após isso faz DELETE nos dados(exclusão fisica);
 
 Buscas:
