@@ -1,6 +1,6 @@
 # API RegPeople - Cadastro de pessoas
 
-Projeto de API para cadastro de dados pessos como CPF, Nome, Data de Nascimento, E-mail e etc...
+Projeto de API para cadastro de dados pessoas como CPF, Nome, Data de Nascimento, E-mail e etc...
 
 Descrição:
 
