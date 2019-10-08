@@ -4,7 +4,7 @@ Projeto de API para cadastro de dados pessoas como CPF, Nome, Data de Nascimento
 
 Descrição:
 
-Api desenvolvida em Spring Boot persistindo dados com JPA Hibernate em banco de dados local MySQL, estrutura baseada em 3 camadas: Controller, Service e Repository, sendo a camada de banco Entity não sendo acessada diretamente mas, usando acesso via DTO(Data Transfer Object) pela camada Service.
+Api desenvolvida em Spring Boot persistindo dados com JPA Hibernate em banco de dados MySQL, estrutura baseada em 3 camadas: Controller, Service e Repository, sendo a camada de banco Entity não sendo acessada diretamente mas, usando acesso via DTO(Data Transfer Object) pela camada Service.
 
 Métodos implementados:
 
@@ -23,10 +23,15 @@ delete - via DELETE - parâmetro id do cadastro da pessoa - verifica se existe o
 Buscas:
 
 findByCpf - via POST - parâmetro cpf - formata CPF, verifica a sua existência, retorno os dados da pessoa encontrada;
+
 findByName - via POST - parâmetro nome - verifica a sua existência, retorno os dados da(s) pessoa(s) encontrada(s);
+
 findByNatural - via POST - parâmetro naturalidade - verifica a sua existência, retorno os dados da(s) pessoa(s) encontrada(s);
+
 findByNationality - via POST - parâmetro nacionalidade - verifica a sua existência, retorno os dados da(s) pessoa(s) encontrada(s);
+
 findByEmail - via POST - parâmetro nacionalidade - verifica a sua existência, retorno os dados da pessoa encontrada;
+
 findByBirthDate - via POST - parâmetro dtNascimento(formato yyy-MM-dd) - verifica a sua existência, retorno os dados da pessoa encontrada;
 
 Requisitos para funcionamento:
